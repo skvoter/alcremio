@@ -9,7 +9,7 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
 
 
 
-![ here's sweet alcremie! ^_^](/home/skvoter/petprojects/alcremio/alcremie.png)
+![ here's sweet alcremie! ^_^](https://github.com/skvoter/alcremio/raw/master/alcremie.png)
 
 
 
