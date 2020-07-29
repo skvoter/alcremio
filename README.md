@@ -23,8 +23,8 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
 
    ` python pyQt pyGObject (or pgi) `
    
-   - pyQt application
-   - playerctl client
+  - pyQt application
+  - playerctl client
    
 2. **alcremio-spotify**
 
@@ -32,11 +32,11 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
 
    ` spotipy`
 
-   - use playerctl + spotifyapi
+  - use playerctl + spotifyapi
 
-   - normal volume changer and offset
+  - normal volume changer and offset
 
-   - change artwork url or use api for that (playerctl returns low quality one)
+  - change artwork url or use api for that (playerctl returns low quality one)
 
 3. **alcremio-youtube** (needs playerctl-youtube browser extension)
 
@@ -44,14 +44,14 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
 
    Support for youtube mixtapes, streams and podcasts , usual videos are supported via the browser extension
 
-   - Use timestamp recognition
-   - Use album artwork
-   - Inspect youtube api (!)
+  - Use timestamp recognition
+  - Use album artwork
+  - Inspect youtube api (!)
 
-   After **alcremio-recognition** has been installed
+    After **alcremio-recognition** has been installed
 
-   - Use audio recognition (shazam-like apis?)
-   - If recognized, toggle Stream Image/Album Artwork
+  - Use audio recognition (shazam-like apis?)
+  - If recognized, toggle Stream Image/Album Artwork
 
 4. **alcremio-stream-playback**
 
@@ -59,9 +59,9 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
 
    Custom simple command-line player for streaming mpeg streams and being supported in playerctl (also can use cvlc instead this one) 
 
-   - **alcremio-recognition** is needed to show track meta and artwork
+  - **alcremio-recognition** is needed to show track meta and artwork
 
-   - client utility (maybe using cvlc) for playing streams like radio or mixtapes
+  - client utility (maybe using cvlc) for playing streams like radio or mixtapes
 
 ### Modules
 
