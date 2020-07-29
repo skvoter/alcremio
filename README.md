@@ -1,4 +1,4 @@
-## alcremio - minimalistic sweet media player companion
+# alcremio - minimalistic sweet media player companion
 Ultimate QT client for playerctl for those who loves mini-players
 
 It is not a replacement of spotify/vlc/youtube apps or else, it's mini-player companion
@@ -13,11 +13,11 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
 
 
 
-### Plan for further development
+## Plan for further development
 
-#### Services
+### Services
 
-1. ##### alcremio
+1. **alcremio**
    
    QT mini-player supporting playerctl data as backend
 
@@ -26,7 +26,7 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
    - pyQt application
    - playerctl client
    
-2. ##### alcremio-spotify (python)
+2. **alcremio-spotify**
 
    Enhanced spotify support with help of the API
 
@@ -38,7 +38,7 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
 
    - change artwork url or use api for that (playerctl returns low quality one)
 
-3. ##### alcremio-youtube (needs playerctl-youtube browser extension)
+3. **alcremio-youtube** (needs playerctl-youtube browser extension)
 
    ` playerctl-youtube-server`
 
@@ -48,12 +48,12 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
    - Use album artwork
    - Inspect youtube api (!)
 
-   ###### After alcremio-recognition installed
+   After **alcremio-recognition** has been installed
 
    - Use audio recognition (shazam-like apis?)
    - If recognized, toggle Stream Image/Album Artwork
 
-4. ##### alcremio-stream-playback
+4. **alcremio-stream-playback**
 
    > not sure about it, may use cvlc instead
 
@@ -63,27 +63,27 @@ Visual reference: [dvx/lofi](https://github.com/dvx/lofi)
 
    - client utility (maybe using cvlc) for playing streams like radio or mixtapes
 
-#### Modules
+### Modules
 
-1. ##### playerctl-youtube
+1. **playerctl-youtube**
 
    Browser extension for parsing youtube video metadata to the MPRIS D-Bus Interface allowing to support simple youtube playback
 
-2. ##### playerctl-youtube-server
+2. **playerctl-youtube-server**
 
    Python service enabling communication with extension though allowing playback control
 
-3. ##### alcremio-recognition
+3. **alcremio-recognition**
 
    Module using some shazam-like recognition (look into yandex, echo etc), making stream and radio playback possible
 
-#### Design Ideas
+### Design Ideas
 
 1. Extra pop-out window with title on hover (calculate position)
 2. Controls on blurred artwork
 3. Resizable
 
-#### Miscellanious
+### Miscellanious
 
 1. Cool-looking readme
 2. Site on github pages
