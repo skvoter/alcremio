@@ -7,6 +7,7 @@ authors = ["Kirill Skvoter <r00t@skvoter.xyz>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 pyqt5 = "^5.15.0"
+requests = "^2.24.0"
 
 [tool.poetry.dev-dependencies]
 

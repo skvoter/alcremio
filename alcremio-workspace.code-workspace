@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"qtForPython.path.designer": "/usr/bin/designer",
+		"qtForPython.path.linguist": "/usr/bin/linguist",
+		"qtForPython.path.lrelease": "/usr/bin/lrelease",
+		"qtForPython.path.pylupdate": "/usr/bin/pylupdate5",
+		"qtForPython.path.pyrcc": "/usr/bin/pyrcc5",
+		"qtForPython.path.pyuic": "/usr/bin/pyuic5",
+		"qtForPython.path.qmlscene": "/usr/bin/qmlscene-qt5",
+		"python.pythonPath": "/home/skvoter/.cache/pypoetry/virtualenvs/alcremio-kWpdqRB7-py3.8/bin/python"
+	}
+}
