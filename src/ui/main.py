@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
 import resources_rc
 import requests
 
@@ -48,7 +49,7 @@ class CtmWidget(QtWidgets.QWidget):
     def __init__(self, parent = None):
         QtWidgets.QWidget.__init__(self, parent)
 
-        self.button = QtWidgets.QPushButton("Close Overlay")
+        self.button = QtWidgets.QPushButton("X")
         self.setLayout(QtWidgets.QHBoxLayout())
         self.layout().addWidget(self.button)
 
@@ -70,6 +71,7 @@ class CtmWidget(QtWidgets.QWidget):
 
     def hideOverlay(self):
         self.parent().hide()
+        sys.exit(0)
 
 
 class Overlay(QtWidgets.QWidget):
@@ -96,12 +98,13 @@ class Overlay(QtWidgets.QWidget):
 
     #     self.widget.move(position_x, position_y)
     #     event.accept()
+def get_screen_size():
+    sizeObject = QtWidgets.QDesktopWidget().screenGeometry(0)
+    return sizeObject.size()
+    
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 600)
-        MainWindow.setMinimumSize(QtCore.QSize(1, 1))
+    def setupLowLevel(self, MainWindow):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -110,7 +113,7 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.label = BackgroundArt(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(0, 0, 600, 600))
+        self.label.setGeometry(QtCore.QRect(0, 0, self.initialSize.width(), self.initialSize.height()))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -126,7 +129,21 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 0, 0)
+
+    def setupOverlay(self):
         self.popup = Overlay(self, CtmWidget())
+
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        self.screenSize = get_screen_size()
+        # min size: 200x200m ideal 500x500 on 2k screen
+        height = int(self.screenSize.height()/3)
+        self.initialSize = QtCore.QSize(height, height)
+        MainWindow.move(1, 1)
+        MainWindow.resize(self.initialSize)
+        MainWindow.setMinimumSize(QtCore.QSize(200, 200))
+        self.setupLowLevel(MainWindow)       
+        self.setupOverlay()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)

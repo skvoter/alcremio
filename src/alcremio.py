@@ -6,7 +6,7 @@ import ui.main
 
 class Alcremio(QtWidgets.QMainWindow, ui.main.Ui_MainWindow):
     def __init__(self, parent=None, flags=QtCore.Qt.WindowFlags()):
-        flags = QtCore.Qt.WindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
+        # flags = QtCore.Qt.WindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
         super().__init__(parent=parent, flags=flags)
         self.setupUi(self)
         self.popup.hide()
@@ -49,20 +49,7 @@ class Alcremio(QtWidgets.QMainWindow, ui.main.Ui_MainWindow):
     
     def displayOverlay(self):
         self.popup.show()
-        print("clicked")
 
-
-    
-    # def mousePressEvent(self, event):
-    #     self.mpos = event.pos()
-    #     return super().mousePressEvent(event)
-    
-    # def mouseMoveEvent(self, event):
-    #     if event.buttons() and QtCore.Qt.LeftButton:
-    #         diff = event.pos() - self.pos()
-    #         newpos = self.pos() + diff
-    #         self.move(newpos)
-    #     return super().mouseMoveEvent(event)
 
 def main():
     print("started")
