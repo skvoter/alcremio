@@ -8,6 +8,10 @@ authors = ["Kirill Skvoter <r00t@skvoter.xyz>"]
 python = "^3.8"
 pyqt5 = "^5.15.0"
 requests = "^2.24.0"
+qtawesome = "^0.7.2"
+vext = "^0.7.3"
+"vext.gi" = "^0.7.0"
+xlib = "^0.21"
 
 [tool.poetry.dev-dependencies]
 
