@@ -13,30 +13,51 @@ class PlayerThread(QtCore.QThread):
     def __init__(self, window):
         QtCore.QThread.__init__(self)
         self.window = window
+        self.window.play_pause_signal.connect(self.play_pause)
+        self.window.get_status_signal.connect(self.get_status)
     
     def run(self):
-
         self.player = Playerctl.Player()
-        self.player.connect('metadata', self.on_metadata)
+        self.player.connect('playback-status', self.on_status)
+        self.player.connect('metadata', self.get_meta)
+        self.get_status()
+        self.get_meta()
+    
+    def get_meta(self, *args, **kwargs):
+        self.window.SongLabel.setText(self.player.get_title())
+        self.window.ArtistLabel.setText(self.player.get_artist())
 
+    def on_status(self, player, status):
+        self.get_status()
 
-    def on_metadata(self, player, metadata):
-        if 'xesam:artist' in metadata.keys() and 'xesam:title' in metadata.keys():
-            print('Now playing:')
-            print('{artist} - {title}'.format(artist=metadata['xesam:artist'][0],
-                                            title=metadata['xesam:title']))
+    # def on_meta(self, player, meta):
+    #     self.get_meta()
 
+    def play_pause(self):
+        self.player.play_pause()
+    
+    def get_status(self):
+        self.window.status = self.player.get_property('playback-status').value_name
+        self.window.playButton.toggle_status()
 
 class Alcremio(QtWidgets.QMainWindow, ui.main_ui.Ui_MainWindow):
+    play_pause_signal = QtCore.pyqtSignal(bool)
+    get_status_signal = QtCore.pyqtSignal(bool)
+
     def __init__(self, parent=None, flags=QtCore.Qt.WindowFlags()):
         flags = QtCore.Qt.WindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
         super().__init__(parent=parent, flags=flags)
+        self.status = ''
         self.setupUi(self)
-        self.setupAnimaions()
         self.playerThread = PlayerThread(self)
-        self.center()
         self.playerThread.run()
+        # self.playerThread.set_status_signal.connect(self.set_status)
+        self.setupAnimaions()
+        self.center()
 
+    # def set_status(self, status):
+    #     self.status = status
+    #     print(status)
 
     def setupAnimaions(self):
         self.effect = QtWidgets.QGraphicsBlurEffect()
@@ -61,7 +82,6 @@ class Alcremio(QtWidgets.QMainWindow, ui.main_ui.Ui_MainWindow):
         self.animationHideOut.setDuration(500)
         self.animationHideOut.setStartValue(1.0)
         self.animationHideOut.setEndValue(0.0)
-        print(self.popup.controlWidgets)
 
     def center(self):
         frameGm = self.frameGeometry()

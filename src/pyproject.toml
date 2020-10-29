@@ -12,6 +12,8 @@ qtawesome = "^0.7.2"
 vext = "^0.7.3"
 "vext.gi" = "^0.7.0"
 xlib = "^0.21"
+pycairo = "^1.19.1"
+pygobject = "^3.36.1"
 
 [tool.poetry.dev-dependencies]
 

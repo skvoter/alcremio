@@ -3,6 +3,7 @@ import sys
 import requests
 import qtawesome as qta
 import ui.fonts_rc
+import time
 
 
 def get_screen():
@@ -12,7 +13,6 @@ def get_screen():
 
 
 class BackgroundArt(QtWidgets.QLabel):
-    hover = QtCore.pyqtSignal('PyQt_PyObject')
 
     def __init__(self, *args, **kwargs):
         QtWidgets.QLabel.__init__(self, *args, **kwargs)
@@ -122,14 +122,33 @@ class MoveWidget(ControlWidget):
 
 
 class PlayPauseWidget(ControlWidget):
+
     def __init__(self, parent = None):
         super().__init__(parent=parent)
-        self.icon = qta.icon('fa5s.play')
-        self.widget.setIcon(self.icon)
+        # self.icon = qta.icon('fa5s.play')
+        # self.widget.setIcon(self.icon)
+        self.parent().parent().get_status_signal.emit(True)
+        self.toggle_status()
 
     def mousePressEvent(self, event):
-        print('play')
+        
+        self.parent().parent().play_pause_signal.emit(True)
+        self.parent().parent().get_status_signal.emit(True)
+        # self.toggle_status()
 
+    
+    def toggle_status(self):
+        # print(self.parent().parent().status)
+        print('TOGGLING')
+        print(self.parent().parent().status)
+        if self.parent().parent().status == 'PLAYERCTL_PLAYBACK_STATUS_PLAYING':
+            self.icon = qta.icon('fa5s.pause')
+            self.widget.setIcon(self.icon)
+        elif self.parent().parent().status == 'PLAYERCTL_PLAYBACK_STATUS_PAUSED':
+            self.icon = qta.icon('fa5s.play')
+            self.widget.setIcon(self.icon)
+        else:
+            print(self.parent().parent().status)
 
 class PrevWidget(ControlWidget):
     def __init__(self, parent = None):
@@ -183,7 +202,12 @@ class Ui_MainWindow(object):
             0, 0, 1, 1,
             alignment=QtCore.Qt.AlignLeft
         )
-        
+        ph = self.CloseButton.parent().geometry().height()
+        px = self.CloseButton.parent().geometry().x()
+        py = self.CloseButton.parent().geometry().y()
+        dw = self.CloseButton.width()
+        dh = self.CloseButton.height()   
+        self.CloseButton.setGeometry( px, py+ph-dh, dw, dh )
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout_2.addItem(spacerItem, 0, 1, 1, 3)
         self.MoveButton = MoveWidget(self.popup)
@@ -193,7 +217,12 @@ class Ui_MainWindow(object):
             0, 4, 1, 1,
             alignment=QtCore.Qt.AlignRight
         )
-
+        ph = self.MoveButton.parent().geometry().height()
+        px = self.MoveButton.parent().geometry().x()
+        py = self.MoveButton.parent().geometry().y()
+        dw = self.MoveButton.width()
+        dh = self.MoveButton.height()   
+        self.MoveButton.setGeometry( px, py, dw, dh )
         spacerItem3 = QtWidgets.QSpacerItem(20, 100, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_2.addItem(spacerItem3, 1, 0, 1, 5)
     
@@ -211,8 +240,8 @@ class Ui_MainWindow(object):
         self.SongLabel.setObjectName("SongLabel")
         self.SongLabel.setAlignment(QtCore.Qt.AlignCenter)
         
-        self.SongLabel.setText("hрусскийere is song title")
-        self.ArtistLabel.setText("machine gun kelly")
+        self.SongLabel.setText("Getting song name...")
+        self.ArtistLabel.setText("Getting artist")
 
         self.gridLayout_2.addWidget(self.SongLabel, 3, 0, 1, 5)
         self.prevButton = PrevWidget(self.popup)
