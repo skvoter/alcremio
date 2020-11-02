@@ -1,4 +1,6 @@
 # alcremio - minimalistic sweet media player companion
+
+## WORK IN PROGRESS
 Ultimate QT client for playerctl for those who loves mini-players
 
 It is not a replacement of spotify/vlc/youtube apps or else, it's mini-player companion
